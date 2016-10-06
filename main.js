@@ -75,68 +75,37 @@ function setBirthMonth() {
 
 function setBirthDay() {
     birthDay = PROMPT.question('Please enter your birth date.\n>');
-    if (birthYear % 4 == 0) {
-        if (birthMonth == 2) {
-            while (birthDay <= 1 || birthDay >= 29 || isNaN(birthDay) == true) {
-                if (birthDay <= 1 || birthDay >= 29) {
-                    birthDay = PROMPT.question('Uh, want to re-do that?\n' +
-                        'Please enter your birth date.\n>');
-                } else {
-                    birthDay = PROMPT.question('That is not a number.\n' +
-                        'Please enter your birth date.\n>');
-                }
+    if (birthMonth == 2) {
+        while (birthDay <= 1 || birthDay >= 28 || isNaN(birthDay) == true) {
+            if (birthDay <= 1 || birthDay >= 28) {
+                birthDay = PROMPT.question('Uh, want to re-do that?\n' +
+                    'Please enter your birth date.\n>');
+            } else if (birthDay == 29) {
+                birthDay = PROMPT.question('You don\'t exist, subhuman.\n' +
+                    'Please enter the 28th as your birth date.\n>');
+            } else {
+                birthDay = PROMPT.question('That is not a number.\n' +
+                'Please enter your birth date.\n>');
             }
-        } else if (birthMonth == 1 || birthMonth == 3 || birthMonth == 5 || birthMonth == 7 || birthMonth == 8 || birthMonth == 10 || birthMonth == 12) {
-            while (birthDay <= 1 || birthDay >= 31 || isNaN(birthDay) == true) {
-                if (birthDay <= 1 || birthDay >= 31) {
-                    birthDay = PROMPT.question('Uh, want to re-do that?\n' +
-                        'Please enter your birth date.\n>');
-                } else {
-                    birthDay = PROMPT.question('That is not a number.\n' +
-                        'Please enter your birth date.\n>');
-                }
-            }
-        } else {
-            while (birthDay <= 1 || birthDay >= 30 || isNaN(birthDay) == true) {
-                if (birthDay <= 1 || birthDay >= 30) {
-                    birthDay = PROMPT.question('Uh, want to re-do that?\n' +
-                        'Please enter your birth date.\n>');
-                } else {
-                    birthDay = PROMPT.question('That is not a number.\n' +
-                        'Please enter your birth date.\n>');
-                }
+        }
+    } else if (birthMonth == 1 || birthMonth == 3 || birthMonth == 5 || birthMonth == 7 || birthMonth == 8 || birthMonth == 10 || birthMonth == 12) {
+        while (birthDay <= 1 || birthDay >= 31 || isNaN(birthDay) == true) {
+            if (birthDay <= 1 || birthDay >= 31) {
+                birthDay = PROMPT.question('Uh, want to re-do that?\n' +
+                    'Please enter your birth date.\n>');
+            } else {
+                birthDay = PROMPT.question('That is not a number.\n' +
+                    'Please enter your birth date.\n>');
             }
         }
     } else {
-        if (birthMonth == 2) {
-            while (birthDay <= 1 || birthDay >= 28 || isNaN(birthDay) == true) {
-                if (birthDay <= 1 || birthDay >= 28) {
-                    birthDay = PROMPT.question('Uh, want to re-do that?\n' +
-                        'Please enter your birth date.\n>');
-                } else {
-                    birthDay = PROMPT.question('That is not a number.\n' +
-                        'Please enter your birth date.\n>');
-                }
-            }
-        } else if (birthMonth == 1 || birthMonth == 3 || birthMonth == 5 || birthMonth == 7 || birthMonth == 8 || birthMonth == 10 || birthMonth == 12) {
-            while (birthDay <= 1 || birthDay >= 31 || isNaN(birthDay) == true) {
-                if (birthDay <= 1 || birthDay >= 31) {
-                    birthDay = PROMPT.question('Uh, want to re-do that?\n' +
-                        'Please enter your birth date.\n>');
-                } else {
-                    birthDay = PROMPT.question('That is not a number.\n' +
-                        'Please enter your birth date.\n>');
-                }
-            }
-        } else {
-            while (birthDay <= 1 || birthDay >= 30 || isNaN(birthDay) == true) {
-                if (birthDay <= 1 || birthDay >= 30) {
-                    birthDay = PROMPT.question('Uh, want to re-do that?\n' +
-                        'Please enter your birth date.\n>');
-                } else {
-                    birthDay = PROMPT.question('That is not a number.\n' +
-                        'Please enter your birth date.\n>');
-                }
+        while (birthDay <= 1 || birthDay >= 30 || isNaN(birthDay) == true) {
+            if (birthDay <= 1 || birthDay >= 30) {
+                birthDay = PROMPT.question('Uh, want to re-do that?\n' +
+                    'Please enter your birth date.\n>');
+            } else {
+                birthDay = PROMPT.question('That is not a number.\n' +
+                    'Please enter your birth date.\n>');
             }
         }
     }
@@ -144,6 +113,17 @@ function setBirthDay() {
 
 function setPremiumDueDate() {
     premiumDueDate = PROMPT.question('Please enter the date your premium will be due in the YYYY-MM-DD format.\n>');
+    let premiumDate = Date.parse(premiumDueDate);
+    while (isNaN(premiumDate) == true || premiumDate <= Date.now()) {
+        if (isNaN(premiumDate) == true) {
+            premiumDueDate = PROMPT.question('Incorrect formatting.\n' +
+                'Please enter the date your premium will be due in the YYYY-MM-DD format.\n>');
+        } else if (premiumDate <= Date.now()) {
+            premiumDueDate = PROMPT.question('Your premium was not due in the past--it doesn\'t exist yet.\n' +
+                'Please enter the date your premium will be due in the YYYY-MM-DD format.\n>');
+        }
+        premiumDate = Date.parse(premiumDueDate);
+    }
 }
 
 function setNumAccidents() {
