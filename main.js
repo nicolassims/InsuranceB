@@ -8,7 +8,8 @@
 "use strict";
 const PROMPT = require('readline-sync');
 
-let policyNum, birthYear, birthMonth, birthDay, premiumDueDate, numAccidents, customerAge, agePrice, monthlyInsurancePremium, continueInt;
+let policyNum, birthYear, birthMonth, birthDay, premiumDueDate, numAccidents, customerAge, agePrice,
+    monthlyInsurancePremium, continueInt;
 let lastName, firstName;
 
 function main() {
